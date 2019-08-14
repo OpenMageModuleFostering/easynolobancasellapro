@@ -1,0 +1,72 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: maintux
+ * Date: 18/12/16
+ * Time: 19:13
+ */
+?>
+<script type="text/javascript">
+    if (typeof Review != 'undefined') {
+
+        var nextStep = function(transport){
+            if (transport && transport.responseText) {
+                response = eval('(' + transport.responseText + ')');
+                if (!response.success) {
+                    var msg = response.error_messages;
+                    if (typeof(msg)=='object') {
+                        msg = msg.join("\n");
+                    }
+                    if (msg) {
+                        alert(msg);
+                    }
+                    if (response.update_section) {
+                        $('checkout-'+response.update_section.name+'-load').update(response.update_section.html);
+                    }
+                    if (response.goto_section) {
+                        checkout.gotoSection(response.goto_section);
+                    }
+                }else{
+                    this.isSuccess = true;
+                    BancaSellaForm.redirectSuccessUrl = this.successUrl;
+
+                    if (typeof response.encrypt_string != 'undefined' && response.encrypt_string) {
+                        BancaSellaForm.stringEncrypt = response.encrypt_string;
+                    }
+
+                    var alternativePayment = typeof alternativePaymentMethodsSelector != 'undefined' && $(alternativePaymentMethodsSelector)  && $(alternativePaymentMethodsSelector).value;
+
+                    if(!BancaSellaForm.lock && ($(BancaSellaForm.radioBancaSella).checked) && !alternativePayment){
+
+                        if (response.success) {
+                            BancaSellaForm.redirectAfterIframe = this.successUrl;
+                        }
+                        if (response.redirect) {
+                            BancaSellaForm.redirectAfterIframe = response.redirect;
+                        }
+
+                        BancaSellaForm.saveDataCC($(BancaSellaForm.formId));
+                        //inviamo i dati della carta
+                        BancaSellaForm.sendPaymentIframe();
+                    }else{
+                        if (response.redirect) {
+                            location.href = response.redirect;
+                            return;
+                        }
+                        if (response.success) {
+                            window.location=this.successUrl;
+                        }
+                    }
+                }
+            }
+        };
+
+        if (typeof Singleton != 'undefined') {
+            Singleton.get(Review).nextStep = nextStep;
+        } else {
+            Review.addMethods({
+                nextStep: nextStep
+            });
+        }
+    }
+</script>

@@ -1,0 +1,25 @@
+<script type="text/javascript">
+    window.tokenPaymentMethodChange = function() {
+        if ($('hid_gestpaypro_token')) {
+            if ($('hid_gestpaypro_token').checked) {
+                $$('.gestpay-form-field').each(function (f) {
+                    $(f).show();
+                });
+            } else {
+                $$('.gestpay-form-field').each(function (f) {
+                    $(f).hide();
+                });
+            }
+        }
+    }
+
+    <?php if (!Mage::app()->getRequest()->isAjax()): ?>
+    document.observe("dom:loaded", function() {
+        <?php endif; ?>
+        setTimeout(function(){
+            tokenPaymentMethodChange();
+        }, 0);
+        <?php if (!Mage::app()->getRequest()->isAjax()): ?>
+    });
+    <?php endif; ?>
+</script>

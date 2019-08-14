@@ -1,0 +1,64 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: maintux
+ * Date: 18/12/16
+ * Time: 10:58
+ */
+?>
+<?php $helper = Mage::helper('easynolo_bancasellapro/recurringprofile'); ?>
+
+<div class="page-title">
+    <h1><?php echo $this->__('My saved cards') ?></h1>
+</div>
+
+<?php echo $this->getMessagesBlock()->toHtml() ?>
+
+<table class="data-table linearize-table-large" id="my-saved-cards-table">
+    <colgroup>
+        <col width="1">
+        <col width="1">
+        <col>
+        <col width="1">
+        <col width="1">
+        <col width="1">
+    </colgroup><thead>
+    <tr class="first last">
+        <th><?php echo $this->__('Card #') ?></th>
+        <th><?php echo $this->__('Vendor') ?></th>
+        <th><?php echo $this->__('Number') ?></th>
+        <th><?php echo $this->__('Expiration Date') ?></th>
+        <th><?php echo $this->__('Recurring Profile') ?></th>
+        <th><?php echo $this->__('Actions') ?></th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach($this->getAllTokens() as  $token): ?>
+        <tr>
+            <td style="text-align: center; vertical-align: middle;"><?php echo $token->getEntityId(); ?></td>
+            <td style="text-align: center; vertical-align: middle;">
+                <?php $_vendor = $helper->getCardVendor($token->getToken()); ?>
+                <span title="<?php echo $_vendor['label']; ?>">
+                    <i style="font-family: PaymentFont;font-style: normal;font-size: 25px;" class="pf-<?php echo $_vendor['id'] ?>"></i>
+                </span>
+            </td>
+            <td style="vertical-align: middle;"><?php echo $helper->getFormattedToken($token->getToken()); ?></td>
+            <td style="text-align: center; vertical-align: middle;"><span class="nobr"><?php echo $token->getExpiryDate(); ?></span></td>
+            <td style="text-align: center; vertical-align: middle;">
+                <?php if($profileId = $token->getProfileId()): ?>
+                    <a href="<?php echo $this->getUrl('sales/recurring_profile/view/', array('profile' => $profileId)) ?>">
+                        <?php echo $profileId; ?>
+                    </a>
+                <?php else: ?>
+                    -
+                <?php endif; ?>
+            </td>
+            <td style="text-align: center; vertical-align: middle;" class="last">
+                <?php if(!$token->getProfileId()): ?>
+                    <a href="<?php echo $this->getUrl('bancasellapro/tokenization/delete/', array('token' => $token->getEntityId())) ?>"><?php echo $this->__('Delete'); ?></a>
+                <?php endif; ?>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+    </tbody>
+</table>

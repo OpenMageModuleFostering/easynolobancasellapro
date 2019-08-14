@@ -1,0 +1,33 @@
+<li class="gestpay-form-field alternative-method alternative-method-<?php echo $this->getCode(); ?>" style="display: none">
+    <label for="gestpay_<?php echo $_code ?>_street_name" class="required"><?php echo $this->__('Shipping street name') ?></label>
+    <div class="input-box">
+        <input type="text" id="gestpay_<?php echo $_code ?>_street_name" name="payment[klarna_street]" title="<?php echo $this->__('Shipping street name') ?>" class="input-text required-entry" value="" />
+    </div>
+</li>
+<li class="gestpay-form-field alternative-method alternative-method-<?php echo $this->getCode(); ?>" style="display: none">
+    <label for="gestpay_<?php echo $_code ?>_city_name" class="required"><?php echo $this->__('Shipping city name') ?></label>
+    <div class="input-box">
+        <input type="text" id="gestpay_<?php echo $_code ?>_city_name" name="payment[klarna_city]" title="<?php echo $this->__('Shipping city name') ?>" class="input-text required-entry" value="" />
+    </div>
+</li>
+<li class="gestpay-form-field alternative-method alternative-method-<?php echo $this->getCode(); ?>" style="display: none">
+    <label for="gestpay_<?php echo $_code ?>_city_name" class="required"><?php echo $this->__('Shipping zip code') ?></label>
+    <div class="input-box">
+        <input type="text" id="gestpay_<?php echo $_code ?>_zip_code" name="payment[klarna_zip]" title="<?php echo $this->__('Shipping zip code') ?>" class="input-text required-entry" value="" />
+    </div>
+</li>
+<li class="gestpay-form-field alternative-method alternative-method-<?php echo $this->getCode(); ?>" style="display: none">
+    <label for="gestpay_<?php echo $_code ?>_country" class="required"><?php echo $this->__('Shipping country') ?></label>
+    <div class="input-box">
+        <select id="gestpay_<?php echo $_code ?>_country" name="payment[klarna_country]" title="<?php echo $this->__('Shipping country') ?>" class="input-select required-entry">
+            <option value=""></option>
+            <option value="AT">AT</option>
+            <option value="DK">DK</option>
+            <option value="FI">FI</option>
+            <option value="DE">DE</option>
+            <option value="NL">NL</option>
+            <option value="NO">NO</option>
+            <option value="SE">SE</option>
+        </select>
+    </div>
+</li>

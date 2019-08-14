@@ -1,0 +1,56 @@
+<?php $alternativeHelper = Mage::helper('easynolo_bancasellapro/alternativePayments'); ?>
+<script type="text/javascript">
+    window.alternativePaymentMethodsSelector = '<?php echo EasyNolo_BancaSellaPro_Helper_AlternativePayments::SELECT_HTMLID; ?>';
+    window.alternativePaymentMethods = <?php echo $alternativeHelper->getMethodsJson(); ?>;
+
+    window.alternativePaymentMethodChange = function(select, checkTokens) {
+        if (select) {
+            var liCreditCard = $$('.payment_form_gestpaypro > li.gestpay-form-field:not(.alternative-method)');
+            $$('.payment_form_gestpaypro > li.gestpay-form-field.alternative-method').each(function(el){ el.hide(); });
+
+            if (select.selectedIndex > 0) {
+                liCreditCard.each(function(el){ el.hide(); });
+                $$('.payment_form_gestpaypro > li.gestpay-form-field.alternative-method-'+select.value).each(function(el){ el.show(); });
+                $$('.payment_form_gestpaypro .gestpay-tokens').each(function(el){ el.hide(); });
+            } else {
+                liCreditCard.each(function(el){ el.show(); });
+                $$('.payment_form_gestpaypro .gestpay-tokens').each(function(el){ el.show();  });
+
+                if (typeof checkTokens == 'undefined' || checkTokens) {
+                    tokenPaymentMethodChange();
+                }
+            }
+        }
+    };
+
+    window.tokenPaymentMethodChange = function() {
+        if ($('hid_gestpaypro_token')) {
+            if ($('hid_gestpaypro_token').checked) {
+                $$('.gestpay-form-field').each(function (f) {
+                    $(f).show();
+                });
+                if ($(alternativePaymentMethodsSelector)) {
+                    alternativePaymentMethodChange($(alternativePaymentMethodsSelector), false);
+                }
+            } else {
+                $$('.gestpay-form-field').each(function (f) {
+                    $(f).hide();
+                });
+            }
+        }
+    }
+
+    <?php if (!Mage::app()->getRequest()->isAjax()): ?>
+    document.observe("dom:loaded", function() {
+        <?php endif; ?>
+        setTimeout(function(){
+            if ($(alternativePaymentMethodsSelector)) {
+                alternativePaymentMethodChange($(alternativePaymentMethodsSelector));
+            }
+
+            tokenPaymentMethodChange();
+        }, 0);
+        <?php if (!Mage::app()->getRequest()->isAjax()): ?>
+    });
+    <?php endif; ?>
+</script>

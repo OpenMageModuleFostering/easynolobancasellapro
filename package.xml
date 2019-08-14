@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<package>
+    <name>EASYNOLOBANCASELLAPRO</name>
+    <version>1.4.6.3</version>
+    <stability>stable</stability>
+    <license>GPL</license>
+    <channel>community</channel>
+    <extends/>
+    <summary>OFFICIAL extension for Magento that allow customers to pay through the GestPay payment gateway by Banca Sella</summary>
+    <description>&lt;p&gt;This module, provided by Easy Nolo (&lt;a href="https://www.easynolo.it"&gt;www.easynolo.it&lt;/a&gt;), is the OFFICIAL extension for Magento to enable in your online store a payment method that allow users to pay through credit cards supported by payment gateway GestPay of Banca Sella (&lt;a href="http://www.sella.it/"&gt;www.sella.it&lt;/a&gt;). The integration method implemented provide:&#xD;
+&#xD;
+        &lt;ul&gt;&#xD;
+&#xD;
+        &lt;li&gt;credit card payment through the redirection of the user to the page of Banca Sella payment gateway "GestPay" and subsequent return to the online store at the end of the transaction;&lt;/li&gt;&#xD;
+&#xD;
+        &lt;li&gt;payment through iFrame Payent Page, in this case the Credit Card data will be send to Banca Sella from the Store Checkout Page, without redirection to the Banca Sella payment gateway.&lt;/li&gt;&#xD;
+&#xD;
+        &lt;/ul&gt;&lt;/p&gt;&#xD;
+&#xD;
+        &#xD;
+&#xD;
+        &lt;h2&gt;Features&lt;/h2&gt;&#xD;
+&#xD;
+        &lt;ul&gt;&#xD;
+&#xD;
+        &lt;li&gt;Redirection of the user on the payment page of Banca Sella&lt;/li&gt;&#xD;
+&#xD;
+        &lt;li&gt;iFrame Payment Page integration *&lt;/li&gt;&#xD;
+&#xD;
+        &lt;li&gt;Magento built-in Recurring Profile Payments *&lt;/li&gt;&#xD;
+&#xD;
+        &lt;li&gt;ReD fraud prevention *&lt;/li&gt;&#xD;
+&#xD;
+        &lt;li&gt;Riskified fraud prevention *&lt;/li&gt;&#xD;
+&#xD;
+        &lt;li&gt;One click payment with tokenization *&lt;/li&gt;&#xD;
+&#xD;
+        &lt;li&gt;Account section for credit cards management *&lt;/li&gt;&#xD;
+&#xD;
+        &lt;li&gt;Capture, Void, Refund through Magento built-in Invoicing system *&lt;/li&gt;&#xD;
+&#xD;
+        &lt;li&gt;Ability to configure the Status of the order in case of payment is confirmed/canceled by Banca Sella or canceled by the user&lt;/li&gt;&#xD;
+&#xD;
+        &lt;li&gt;Test Mode: payments will be send to https://testecomm.sella.it&lt;/li&gt;&#xD;
+&#xD;
+        &lt;li&gt;Debug Mode: ability to turn on logging of the activities of the module. The logs are saved in the folder var/log of Magento installation&lt;/li&gt;&#xD;
+&#xD;
+        &lt;/ul&gt;&#xD;
+&#xD;
+        &#xD;
+&#xD;
+        &lt;p&gt;* available only if configured on GestPay backend as well.&lt;/p&gt;&#xD;
+&#xD;
+        &#xD;
+&#xD;
+        &lt;h2&gt;Compatibility&lt;/h2&gt;&#xD;
+&#xD;
+        &lt;p&gt;This module is compatible with these major Magento versions:&lt;/p&gt;&#xD;
+&#xD;
+        &lt;ul&gt;&#xD;
+&#xD;
+        &lt;li&gt;CE 1.7.0.2&lt;/li&gt;&#xD;
+&#xD;
+        &lt;li&gt;CE 1.8.1.0&lt;/li&gt;&#xD;
+&#xD;
+        &lt;li&gt;CE 1.9.2.4&lt;/li&gt;&#xD;
+&#xD;
+        &lt;li&gt;CE 1.9.3.0&lt;/li&gt;&#xD;
+&#xD;
+        &lt;/ul&gt;&#xD;
+&#xD;
+        &#xD;
+&#xD;
+        &lt;h2&gt;System Requirements&lt;/h2&gt;&#xD;
+&#xD;
+        &lt;ul&gt;&#xD;
+&#xD;
+        &lt;li&gt;PHP &gt;= 5.2.0&lt;/li&gt;&#xD;
+&#xD;
+        &lt;li&gt;OpenSSL PHP extension&lt;/li&gt;&#xD;
+&#xD;
+        &lt;li&gt;Curl PHP extension&lt;/li&gt;&#xD;
+&#xD;
+        &lt;/ul&gt;&#xD;
+&#xD;
+        &#xD;
+&#xD;
+        &lt;h2&gt;Documentation&lt;/h2&gt;&#xD;
+&#xD;
+        &lt;p&gt;If you have any issues with this extension, please refer to the &lt;a href="https://www.sella.it/gestpay/assets/pdf/EasyNolo_BancaSellaPro_v1.4.0.0_finale.pdf"&gt;Documentation&lt;/a&gt;&lt;/p&gt;&#xD;
+&#xD;
+        &#xD;
+&#xD;
+        &lt;h2&gt;Support&lt;/h2&gt;&#xD;
+&#xD;
+        &lt;p /&gt;If you have any issues with this extension, please send an email to &lt;a href="mailto:ecommerce@sella.it"&gt;ecommerce@sella.it&lt;/a&gt;</description>
+    <notes>- fixed some bugs&#xD;
+&#xD;
+- support for IWD one page checkout&#xD;
+&#xD;
+- support for Idev one step checkout&#xD;
+&#xD;
+- external payments</notes>
+    <authors><author><name>Easy Nolo SpA</name><user>easy_nolo</user><email>alessio.damonti@sella.it</email></author></authors>
+    <date>2017-04-26</date>
+    <time>12:15:27</time>
+    <contents><target name="magecommunity"><dir name="EasyNolo"><dir name="BancaSellaPro"><dir name="Block"><dir name="Adminhtml"><dir name="System"><dir name="Config"><file name="Gestpayinfo.php" hash="757a9fcc598903ef14f65ea60346973c"/><file name="Redinfo.php" hash="04e51c6969ae71afa2d97ea83a53c46a"/><file name="Riskifiedinfo.php" hash="be096697a36f22dd3e8b3a9aaad71437"/></dir></dir></dir><dir name="AlternativePayments"><file name="Info.php" hash="97f64fcf29287039bbe1a2227add99cd"/></dir><file name="Confirm3d.php" hash="1748f46552f38387d9ef7a206ef64994"/><file name="Form.php" hash="4832d1508d7677d09cd8bd0ddf775742"/><file name="Newroot.php" hash="37bd80f36e789a5337a3daff1d2cf7ff"/><file name="Redirect.php" hash="97ab12024835edc02493de228d57947c"/><dir name="Tokenization"><file name="List.php" hash="c429369a6bc2da9a21288339627c01aa"/><file name="Newtoken.php" hash="79340d48c433c20b8f920811aa14e8ac"/></dir><dir name="Utility"><file name="Text.php" hash="8453faf49af4d416492f98aa65b9868d"/></dir></dir><file name="Exception.php" hash="9de691c89f0eb1c280ef92c31d2aa6a8"/><dir name="Helper"><dir name="AlternativePayments"><file name="Ideal.php" hash="665649c92f5ee8425788a7e2ed484b66"/><file name="Interface.php" hash="840bec54c97d95e6c94f2ee92564c265"/><file name="Klarna.php" hash="5c0333e229f437c88d9398a4d331f3a3"/><file name="Mybank.php" hash="b8fb96d3b0992de6bd5e76d8b8518274"/><file name="Paypal.php" hash="43a65a6a06c8b00591b33a97adf60845"/><file name="Qiwi.php" hash="12b573a68716ddb4a414017f91f0a483"/><file name="Sofort.php" hash="e715ba758ffebadbdef6122f6691993a"/><file name="UnionPay.php" hash="b0fcd2af36ea3eb0a565a868a69738b0"/></dir><file name="AlternativePayments.php" hash="c835994d54cb90176e1a9f20612aec80"/><file name="Baseclient.php" hash="9467261ed60b06ec2880741100c2c340"/><file name="Crypt.php" hash="ca1a2b546f7df83776e69593ba39101b"/><file name="Data.php" hash="e34a57818c77eb55664db910ec6ff2f3"/><file name="Recurringprofile.php" hash="19300223aaa39527a9105fdc11a2dd7d"/><file name="Red.php" hash="d493b6a060a72e0c0ec5f432b96ab945"/><file name="Riskified.php" hash="ede6cc0d78d4f9506c553fdd190b63a2"/><file name="S2s.php" hash="05e9807bee20ca4b4b85757cd977331c"/></dir><dir name="Model"><file name="Gestpay.php" hash="1f41795c656ce6cdd3fa4794605de46b"/><file name="Observer.php" hash="2d4936d8d6bb4102727311ca8c80af04"/><dir name="Resource"><dir name="Sales"><dir name="Order"><dir name="FingerPrint"><file name="Collection.php" hash="f7a7a232e6151cb83034281f843fba92"/></dir><file name="FingerPrint.php" hash="ffc79ae2661bc2afe460678de49c4248"/></dir></dir><dir name="Token"><file name="Collection.php" hash="e6b6104f94e9dcd2d28927090552ee61"/></dir><file name="Token.php" hash="3539976882da08550b612ae0316c7628"/></dir><dir name="Sales"><dir name="Order"><file name="FingerPrint.php" hash="a101ec48a1016362d8ac7ba8cc127939"/></dir><dir name="Recurring"><file name="Profile.php" hash="644520b275a0f535eb6b881d50a2e708"/></dir></dir><dir name="System"><dir name="Config"><dir name="Source"><file name="Currency.php" hash="098d64776e12ec7599ff9339e5c504b5"/><file name="FraudOrderStatus.php" hash="a1217938da5d7e1a305d5c746e3ac16e"/><file name="Language.php" hash="92f4275a8911cf9e22fda7e22596fdd0"/><file name="OrderStatus.php" hash="00a4cad29a4de65b1129f38496b057b7"/><file name="PaymentAction.php" hash="c78defcf9655741b2c8423eee7f3fbeb"/><file name="TokenizationContext.php" hash="dfba2748ab39b4e47ddfafca6dce8363"/></dir></dir></dir><file name="Token.php" hash="24af355118b97004990358e5128ca56e"/><dir name="Webservice"><file name="Abstract.php" hash="3edc6e1eca436b52b74b080071326d01"/><file name="Wscryptdecrypt.php" hash="c138ea1b28022cdf2a56c322bd848be1"/><file name="Wss2s.php" hash="5e46361da8cfdb262c06e2f5174eab19"/></dir></dir><dir name="controllers"><file name="AjaxController.php" hash="0f3b33e51c1f7db4799cf9a58fb3d04a"/><dir name="Checkout"><file name="OnepageController.php" hash="af22c6cc81d0ce00fdf9555e0038c8c1"/></dir><file name="GestpayController.php" hash="fe7e9f928cef54e1f8081bbd44d7071a"/><file name="JsonController.php" hash="161a211f82dc838561250e071d6a0adb"/><file name="TokenizationController.php" hash="c6f33d49764033dc800186f764924802"/></dir><dir name="etc"><file name="config.xml" hash="606f9976c1d425daeab7c14048135d18"/><file name="jstranslator.xml" hash="920aae1d6d4503df794d8830b60e500e"/><file name="system.xml" hash="28d732fa87564e9a5c77aba6f4cd2e4c"/></dir><dir name="sql"><dir name="easynolo_bancasellapro_setup"><file name="install-1.3.0.php" hash="aa542fc162f55557dbaf3f93165b6944"/><file name="upgrade-1.3.0-1.3.1.php" hash="43f9171d7beeaf6b350f76778bb2eb35"/><file name="upgrade-1.4.2-1.4.3.php" hash="8b37559eb7129dab7705d4a0a9729d6a"/><file name="upgrade-1.4.3-1.4.4.php" hash="0b51164f6b9433ff3d51b7e3257025f4"/><file name="upgrade-1.4.4-1.4.5.php" hash="abb3f09e985c6911b0576a16812242ee"/><file name="upgrade-1.4.5-1.4.6.php" hash="aa1878bb0a9970e68fa9502e4380981a"/></dir></dir><file name=".project" hash="95ae41fab13d551617313d17856e6998"/></dir></dir></target><target name="magedesign"><dir name="frontend"><dir name="base"><dir name="default"><dir name="layout"><file name="easynolo_bancasellapro.xml" hash="646ef5d889dffc1a3f94b53dc359d42d"/></dir><dir name="template"><dir name="easynolo"><dir name="bancasellapro"><dir name="gestpay"><dir name="alternative_payments"><file name="default.phtml" hash="9200b8e5cfaf76a4f845850d98653f35"/><file name="js.phtml" hash="b89773fc46fb64118c8494e24423a818"/><file name="klarna.phtml" hash="f5bd1397714a88bd4c957f3eae7f4532"/><file name="nojs.phtml" hash="111db1b174f952fe104d9df09830e96a"/></dir><file name="alternative_payments.phtml" hash="4c7d871827996fb30b6e0127f4ffea41"/><file name="confirm3d.phtml" hash="8b7a1172989831dd741cd24608d4dce6"/><file name="form.phtml" hash="a8e712e5f1eda97c676fb23b122aa4e9"/><file name="form_idev.phtml" hash="6a14807cb9354f90d59afd7c9482a354"/><file name="form_onepagecheckout.phtml" hash="b512480ed21e4d5529c1d29263afb315"/><file name="iframe.phtml" hash="f16b5506d89cf244bda22cac5c79c355"/><file name="newtoken.phtml" hash="b9b6b99fcd4968961b42339ba9536429"/><file name="redirect.phtml" hash="16fc850ca5955abf0a13ad9e0feb5d47"/><file name="riskified.phtml" hash="4bea89e99f538e568b9243534f4f0a2e"/><dir name="token"><file name="list.phtml" hash="be694e81b2da8d1827ce11a84f980ff6"/></dir></dir><dir name="page"><file name="redirect.phtml" hash="b4355d7f50036ac9bbe065c797466edb"/></dir></dir></dir></dir></dir></dir><dir name="enterprise"><dir name="default"><dir name="layout"><file name="easynolo_bancasellapro.xml" hash="bfd503f91a9592e74f4e388ce02c86ca"/></dir></dir></dir></dir></target><target name="mageetc"><dir name="modules"><file name="EasyNolo_BancaSellaPro.xml" hash="822546906a1d54b670c2610cab8761fb"/><file name="EasyNolo_BancaSellaPro.xml.Onepage.txt" hash="08b9164dcc646e2629907b5e90b43fff"/></dir></target><target name="magelocale"><dir name="en_US"><file name="EasyNolo_BancaSellaPro.csv" hash="1a6de8af46571d3f12bb4ce82da04029"/></dir><dir name="it_IT"><file name="EasyNolo_BancaSellaPro.csv" hash="0a5a3a4e2bb19b1bfb89dbca7f4850de"/></dir></target><target name="mage"><dir name="js"><dir name="bancasellapro"><file name="gestpayform.js" hash="2010993468039be8b6dfeca9d0dc3018"/><file name="gestpayform_idev_onestepcheckout.js" hash="ad72abe5f978b9558e2dbef9e8148966"/><file name="gestpayform_onepagecheckout.js" hash="4d82a92d9a398a5a7f3180cde6cb39c4"/><file name="gestpayform_onepagecheckout_jquery.js" hash="4acf39c43ab474631c49816e74789dbc"/><dir name="jquery"><file name="jquery-1.10.2.js" hash="91515770ce8c55de23b306444d8ea998"/><file name="jquery-1.10.2.min.js" hash="841dc30647f93349b7d8ef61deebe411"/><file name="jquery-1.10.2.min.map" hash="6c3ccfc221d36777d383b6e04d0b8af9"/><file name="noconflict.js" hash="8643b330825b639a858b4033d4667786"/></dir><file name="newtoken.js" hash="8c1905c3e2260ce22f575390f05597c2"/><file name="red_blackbox.js" hash="c73d804209823be115f8420eff0b62d2"/><file name="riskified.js" hash="b944efe6f4ff018dcc1cd51c65fc3962"/></dir></dir></target><target name="mageskin"><dir name="adminhtml"><dir name="default"><dir name="default"><dir name="images"><dir name="bancasellapro"><file name="gestpay.png" hash="55262a719e16c5c430e9e5b3c9514ce8"/><file name="red.png" hash="8d66e8c43c23f2665a85da5cc8287f0a"/><file name="riskified.png" hash="fb954640772e6e5f086541af5a99933c"/></dir></dir></dir></dir></dir><dir name="frontend"><dir name="base"><dir name="default"><dir name="css"><dir name="easynolo_bancasella"><file name="gestpay.css" hash="b2678b4fc95c114508e94240a290a280"/></dir></dir><dir name="images"><dir name="easynolo_bancasella"><file name="wait.gif" hash="c717328261f92d92c1b1f550d222e0e4"/></dir></dir></dir></dir></dir></target></contents>
+    <compatible/>
+    <dependencies><required><php><min>5.2.0</min><max>5.7.0</max></php></required></dependencies>
+</package>

@@ -1,0 +1,806 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <payment>
+            <groups>
+                <gestpaypro translate="label" module="easynolo_bancasellapro">
+                    <label>EasyNolo Banca Sella GestPay Pro</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>50</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <info>
+                            <frontend_model>easynolo_bancasellapro/adminhtml_system_config_gestpayinfo</frontend_model>
+                            <frontend_type>label</frontend_type>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </info>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </active>
+                        <title translate="label">
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        <description translate="label">
+                            <label>Description</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </description>
+                        <merchant_id translate="label">
+                            <label>Shop Login</label>
+                            <sort_order>4</sort_order>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </merchant_id>
+                        <debug translate="label">
+                            <label>Test Environment</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>
+                                <![CDATA[If enabled please insert a test shop login; so the payments will be send to https://testecomm.sella.it]]>
+                            </comment>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </debug>
+                        <payment_action translate="label">
+                            <label>Payment Action</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>easynolo_bancasellapro/system_config_source_paymentAction</source_model>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </payment_action>
+                        <use_s2s_api>
+                     		<label>Use S2S Sales API for Capture, Void, Refund actions</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>
+                                <![CDATA[If enabled, this operations will be performed natively through Magento Invoicing system.]]>
+                            </comment>
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </use_s2s_api>
+                        <iframe translate="label">
+                            <label>Enable iFrame Payment Page</label>
+                            <comment>
+                                <![CDATA[If enabled the payment process will be performed without redirection to the Banca Sella payment website.<br/><b>Please note:</b> available only if configured on GestPay backend as well.]]>
+                            </comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>8</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </iframe>
+                        <tokenization translate="label">
+                            <label>Enable Tokenization</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>
+                                <![CDATA[<b>Please note:</b> available only if configured on GestPay backend as well.]]>
+                            </comment>
+                            <sort_order>9</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends><iframe>1</iframe></depends>
+                        </tokenization>
+                        <tokenization_context translate="label">
+                            <label>Tokenization Context</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>easynolo_bancasellapro/system_config_source_tokenizationContext</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <iframe>1</iframe>
+                                <tokenization>1</tokenization>
+                            </depends>
+                        </tokenization_context>
+                        <language translate="label">
+                            <label>Gateway Language</label>
+                            <frontend_type>select</frontend_type>
+                            <comment>
+                                <![CDATA[<b>Please note:</b> available only if configured on GestPay backend as well.]]>
+                            </comment>
+                            <sort_order>11</sort_order>
+                            <source_model>easynolo_bancasellapro/system_config_source_language</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </language>
+                        <currency translate="label">
+                            <label>Gateway Currency</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>12</sort_order>
+                            <source_model>easynolo_bancasellapro/system_config_source_currency</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </currency>
+						<order_status translate="label">
+						   <label>New Order Status</label>
+						   <frontend_type>select</frontend_type>
+						   <source_model>easynolo_bancasellapro/system_config_source_orderStatus</source_model>
+						   <sort_order>13</sort_order>
+						   <show_in_default>1</show_in_default>
+						   <show_in_website>1</show_in_website>
+						   <show_in_store>0</show_in_store>
+						</order_status>
+                        <order_status_ko_user translate="label">
+                            <label>Status of order canceled by customer</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>easynolo_bancasellapro/system_config_source_orderStatus</source_model>
+                            <sort_order>14</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </order_status_ko_user>
+                        <order_status_ko_gestpay translate="label">
+                            <label>Status of order canceled by Banca Sella</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>easynolo_bancasellapro/system_config_source_orderStatus</source_model>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </order_status_ko_gestpay>
+                        <order_status_ok_gestpay translate="label">
+                            <label>Status of order confirmed by Banca Sella</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>easynolo_bancasellapro/system_config_source_orderStatus</source_model>
+                            <sort_order>16</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </order_status_ok_gestpay>
+                        <order_status_fraud_gestpay translate="label">
+                            <label>Enable Anti-Fraud Check</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>
+                                <![CDATA[If the payment match the anti-fraud rules, the related order state will be switched to "Review Payment" and order status to "Fraud"]]>
+                            </comment>
+                            <sort_order>17</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </order_status_fraud_gestpay>
+                        <allowspecific translate="label">
+                            <label>Payment from Applicable Countries</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>18</sort_order>
+                            <source_model>adminhtml/system_config_source_payment_allspecificcountries</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </allowspecific>
+                        <specificcountry translate="label">
+                            <label>Payment from Specific Countries</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <sort_order>19</sort_order>
+                            <source_model>adminhtml/system_config_source_country</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends><allowspecific>1</allowspecific></depends>
+                        </specificcountry>
+                        <sort_order translate="label">
+                            <label>Sort Order</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_class>validate-number</frontend_class>
+                        </sort_order>
+                        <log translate="label">
+                            <label>Enable Log</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>
+                                <![CDATA[Logging from Mage::log(). File is located in {{base_dir}}/var/log/<i>EasyNolo_BancaSellaPro.log</i>]]>
+                            </comment>
+                            <sort_order>21</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </log>
+                    </fields>
+                </gestpaypro>
+                <gestpaypro_red translate="label" module="easynolo_bancasellapro">
+                    <label>EasyNolo Banca Sella GestPay Pro - Fraud Prevention by RED</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>51</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <info>
+                            <frontend_model>easynolo_bancasellapro/adminhtml_system_config_redinfo</frontend_model>
+                            <frontend_type>label</frontend_type>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </info>
+                        <enable translate="label">
+                            <label>Enable RED</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>
+                                <![CDATA[Flag to activate Fraud Prevention by RED]]>
+                            </comment>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </enable>
+                        <customer_info translate="label">
+                            <label>Customer Info Tag</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>
+                                <![CDATA[Send Customer Info Tag]]>
+                            </comment>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends><enable>1</enable></depends>
+                        </customer_info>
+                        <shipping_info translate="label">
+                            <label>Shipping Info Tag</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>
+                                <![CDATA[Send Shipping Info Tag]]>
+                            </comment>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends><enable>1</enable></depends>
+                        </shipping_info>
+                        <billing_info translate="label">
+                            <label>Billing Info Tag</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>
+                                <![CDATA[Send Billing Info Tag]]>
+                            </comment>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends><enable>1</enable></depends>
+                        </billing_info>
+                        <customer_data translate="label">
+                            <label>Customer Data Tag</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>
+                                <![CDATA[Send Customer Data Tag]]>
+                            </comment>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends><enable>1</enable></depends>
+                        </customer_data>
+                        <order_items translate="label">
+                            <label>Items Tag</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>
+                                <![CDATA[Send Items Tag]]>
+                            </comment>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends><enable>1</enable></depends>
+                        </order_items>
+                        <merchant_id translate="label">
+                            <label>Merchant ID</label>
+                            <frontend_type>text</frontend_type>
+                            <comment>
+                                <![CDATA[Optional - Only for merchant with a specific set of rules (Code provided by Sella)]]>
+                            </comment>
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends><enable>1</enable></depends>
+                        </merchant_id>
+                        <service_type translate="label">
+                            <label>Service Type</label>
+                            <frontend_type>text</frontend_type>
+                            <comment>
+                                <![CDATA[Optional - Only for merchant with a specific set of rules (Code provided by Sella)]]>
+                            </comment>
+                            <sort_order>8</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends><enable>1</enable></depends>
+                        </service_type>
+                        <deny_order_status translate="label">
+                            <label>Deny Order Status</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>easynolo_bancasellapro/system_config_source_fraudOrderStatus</source_model>
+                            <sort_order>9</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends><enable>1</enable></depends>
+                        </deny_order_status>
+                        <challenge_order_status translate="label">
+                            <label>Challenge Order Status</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>easynolo_bancasellapro/system_config_source_fraudOrderStatus</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends><enable>1</enable></depends>
+                        </challenge_order_status>
+                    </fields>
+                </gestpaypro_red>
+                <gestpaypro_riskified translate="label" module="easynolo_bancasellapro">
+                    <label>EasyNolo Banca Sella GestPay Pro - Fraud Prevention by Riskified</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>52</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <info>
+                            <frontend_model>easynolo_bancasellapro/adminhtml_system_config_riskifiedinfo</frontend_model>
+                            <frontend_type>label</frontend_type>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </info>
+                        <enable translate="label">
+                            <label>Enable Riskified</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>
+                                <![CDATA[Flag to activate Fraud Prevention by Riskified]]>
+                            </comment>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </enable>
+                        <customer_data translate="label">
+                            <label>Customer Detail Tag</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>
+                                <![CDATA[Send Customer Detail Tag]]>
+                            </comment>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends><enable>1</enable></depends>
+                        </customer_data>
+                        <shipping_info translate="label">
+                            <label>Shipping Info Tag</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>
+                                <![CDATA[Send Shipping Info Tag]]>
+                            </comment>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends><enable>1</enable></depends>
+                        </shipping_info>
+                        <billing_info translate="label">
+                            <label>Billing Info Tag</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>
+                                <![CDATA[Send Billing Info Tag]]>
+                            </comment>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends><enable>1</enable></depends>
+                        </billing_info>
+                        <product_details translate="label">
+                            <label>Product Details Tag</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>
+                                <![CDATA[Send Product Details Tag]]>
+                            </comment>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends><enable>1</enable></depends>
+                        </product_details>
+                        <declined_order_status translate="label">
+                            <label>Declined Order Status</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>easynolo_bancasellapro/system_config_source_fraudOrderStatus</source_model>
+                            <sort_order>9</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends><enable>1</enable></depends>
+                        </declined_order_status>
+                        <submitted_order_status translate="label">
+                            <label>Submitted Order Status</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>easynolo_bancasellapro/system_config_source_fraudOrderStatus</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends><enable>1</enable></depends>
+                        </submitted_order_status>
+                    </fields>
+                </gestpaypro_riskified>
+                <gestpaypro_alternative_payments translate="label" module="easynolo_bancasellapro">
+                    <label>EasyNolo Banca Sella GestPay Pro - Alternative Payments</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>53</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enable_alipay translate="label">
+                            <label>Enable Alipay</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>
+                                <![CDATA[Flag to activate Alipay integration]]>
+                            </comment>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </enable_alipay>
+                        <enable_bitcoin translate="label">
+                            <label>Enable Bitcoin</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>
+                                <![CDATA[Flag to activate Bitcoin integration]]>
+                            </comment>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </enable_bitcoin>
+                        <enable_consel translate="label">
+                            <label>Enable Consel</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>
+                                <![CDATA[Flag to activate Consel integration]]>
+                            </comment>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </enable_consel>
+                        <consel_promocode translate="label">
+                            <label>Consel - Merchant Promotional Code</label>
+                            <frontend_type>text</frontend_type>
+                            <comment>
+                                <![CDATA[Mandatory to show Consel in the pagam's Payment Method]]>
+                            </comment>
+                            <sort_order>22</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends><enable_consel>1</enable_consel></depends>
+                        </consel_promocode>
+                        <enable_eps translate="label">
+                            <label>Enable EPS</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>
+                                <![CDATA[Flag to activate EPS integration]]>
+                            </comment>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </enable_eps>
+                        <enable_giropay translate="label">
+                            <label>Enable Giropay</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>
+                                <![CDATA[Flag to activate EPS integration]]>
+                            </comment>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </enable_giropay>
+
+                        <enable_mybank translate="label">
+                            <label>Enable MyBank</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>
+                                <![CDATA[Flag to activate MyBank integration]]>
+                            </comment>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </enable_mybank>
+
+                        <mybank_bankcode>
+                            <label>MyBank - Bank Code</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends><enable_mybank>1</enable_mybank></depends>
+                        </mybank_bankcode>
+
+                        <enable_ideal translate="label">
+                            <label>Enable IDeal</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>
+                                <![CDATA[Flag to activate IDeal integration]]>
+                            </comment>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </enable_ideal>
+
+                        <ideal_bankcode>
+                            <label>IDeal - Bank Code</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends><enable_ideal>1</enable_ideal></depends>
+                        </ideal_bankcode>
+
+                        <enable_klarna translate="label">
+                            <label>Enable Klarna</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>
+                                <![CDATA[Flag to activate Klarna integration]]>
+                            </comment>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </enable_klarna>
+
+                        <enable_konbini translate="label">
+                            <label>Enable Konbini</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>
+                                <![CDATA[Flag to activate Konbini integration]]>
+                            </comment>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </enable_konbini>
+
+                        <enable_mercadopago translate="label">
+                            <label>Enable MercadoPago</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>
+                                <![CDATA[Flag to activate MercadoPago integration]]>
+                            </comment>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </enable_mercadopago>
+
+                        <enable_multibanco translate="label">
+                            <label>Enable Multibanco</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>
+                                <![CDATA[Flag to activate Multibanco integration]]>
+                            </comment>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </enable_multibanco>
+
+
+                        <enable_paypal translate="label">
+                            <label>Enable Paypal</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>
+                                <![CDATA[Flag to activate Paypal integration]]>
+                            </comment>
+                            <sort_order>120</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </enable_paypal>
+
+                        <paypal_show_product_info translate="label">
+                            <label>Paypal - Show product info</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>
+                                <![CDATA[Show product info at paypal’s buying page]]>
+                            </comment>
+                            <sort_order>121</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends><enable_paypal>1</enable_paypal></depends>
+                        </paypal_show_product_info>
+                        <paypal_seller_protection translate="label">
+                            <label>Paypal - Seller Protection</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>
+                                <![CDATA[Enable Paypal seller protection]]>
+                            </comment>
+                            <sort_order>123</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends><enable_paypal>1</enable_paypal></depends>
+                        </paypal_seller_protection>
+
+                        <enable_paysafecard translate="label">
+                            <label>Enable Paysafecard</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>
+                                <![CDATA[Flag to activate Paysafecard integration]]>
+                            </comment>
+                            <sort_order>130</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </enable_paysafecard>
+
+                        <enable_qiwi translate="label">
+                            <label>Enable QIWI</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>
+                                <![CDATA[Flag to activate QIWI integration]]>
+                            </comment>
+                            <sort_order>135</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </enable_qiwi>
+
+                        <enable_sofort translate="label">
+                            <label>Enable Sofort</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>
+                                <![CDATA[Flag to activate Sofort integration]]>
+                            </comment>
+                            <sort_order>140</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </enable_sofort>
+
+                        <enable_tenpay translate="label">
+                            <label>Enable TenPay</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>
+                                <![CDATA[Flag to activate TenPay integration]]>
+                            </comment>
+                            <sort_order>150</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </enable_tenpay>
+
+                        <enable_timpersonal translate="label">
+                            <label>Enable TIMpersonal</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>
+                                <![CDATA[Flag to activate TIMpersonal integration]]>
+                            </comment>
+                            <sort_order>160</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </enable_timpersonal>
+
+                        <enable_unionpay translate="label">
+                            <label>Enable UnionPay</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>
+                                <![CDATA[Flag to activate UnionPay integration]]>
+                            </comment>
+                            <sort_order>170</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </enable_unionpay>
+
+                        <enable_webmoney translate="label">
+                            <label>Enable WebMoney</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>
+                                <![CDATA[Flag to activate WebMoney integration]]>
+                            </comment>
+                            <sort_order>180</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </enable_webmoney>
+
+                        <enable_yandex translate="label">
+                            <label>Enable Yandex</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>
+                                <![CDATA[Flag to activate Yandex integration]]>
+                            </comment>
+                            <sort_order>180</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </enable_yandex>
+                    </fields>
+                </gestpaypro_alternative_payments>
+            </groups>
+        </payment>
+    </sections>
+</config>

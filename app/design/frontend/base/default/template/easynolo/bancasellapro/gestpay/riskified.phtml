@@ -1,0 +1,17 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: maintux
+ * Date: 30/12/16
+ * Time: 16:11
+ */
+?>
+
+<script type="text/javascript">
+    //<![CDATA[
+    var riskified_store_domain = '<?php echo Mage::app()->getRequest()->getHttpHost(); ?>';
+    var riskified_session_id = '<?php echo Mage::getSingleton("core/session")->getEncryptedSessionId() ?>';
+    //]]>
+</script>
+
+<script type="text/javascript" src="<?php echo $this->getJSUrl('bancasellapro/riskified.js') ?>"></script>

@@ -1,0 +1,193 @@
+<?php
+/**
+ * @category EasyNolo
+ * @package  EasyNolo_BancaSellaPro
+ * @author   Easy Nolo <ecommerce@sella.it>
+ */
+?>
+
+<?php
+    /* @var $this EasyNolo_BancaSellaPro_Block_Form */
+    /* @var $method EasyNolo_BancaSellaPro_Model_Gestpay */
+    $method = $this->getMethod();
+    $_code = $this->getMethodCode();
+    $merchantId = $method->getMerchantId();
+
+    $alternativeHelper = Mage::helper('easynolo_bancasellapro/alternativePayments');
+?>
+<?php
+try{
+    /** @var EasyNolo_BancaSellaPro_Helper_Crypt $helper */
+    $encryptString = false;
+
+    // If RED is enabled we must retrieve encrypted string after order confirmation.
+    if( $this->isAjaxRequest() && $this->isIframeEnabled() && !$this->isRedEnabled() && !$this->isRiskifiedEnabled()){
+        $helper = Mage::helper('easynolo_bancasellapro/crypt');
+        $encryptString = $helper->getEncryptStringBeforeOrder($method);
+    }
+    ?>
+
+    <fieldset class="form-list">
+        <?php if($this->isIframeEnabled()): ?>
+            <ul class="form-list payment_form_<?php echo $_code ?>" id="payment_iframe_<?php echo $_code ?>" style="display:none;">
+                <?php if ($alternativeHelper->isEnabled()): ?>
+                    <?php echo $alternativeHelper->getSelectBox();?>
+                <?php else: ?>
+                    <?php echo $alternativeHelper->getNoJs(); ?>
+                <?php endif; ?>
+                <?php $hasToken = $this->showToken(); ?>
+                <?php if($hasToken): ?>
+                    <?php $token_helper = Mage::helper('easynolo_bancasellapro/recurringprofile'); ?>
+                    <li class="gestpay-tokens">
+                        <h4><?php echo $this->__('Your saved cards'); ?></h4>
+                        <table style="width: 100%">
+                            <thead>
+                            <tr>
+                                <th>&nbsp;</th>
+                                <th><?php echo $this->__('Card') ?></th>
+                                <th><?php echo $this->__('Expiration') ?></th>
+                                <th>&nbsp;</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php $i = 0; foreach ($this->getAllTokens() as $token): ?>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;">
+                                        <input <?php if($i==0){ echo 'checked'; } ?> onclick="tokenPaymentMethodChange();" type="radio" id="hid_<?php echo $_code ?>_token_<?php echo $i;?>" name="bancasella_iframe[token]" style="margin-right: 4px;" value="<?php echo $token->getEntityId(); ?>" autocomplete="off" />
+                                    </td>
+                                    <td style="vertical-align: middle;"><label for="hid_<?php echo $_code ?>_token_<?php echo $i;?>"><?php echo $token_helper->getFormattedToken($token->getToken()); ?></label></td>
+                                    <td style="vertical-align: middle;"><span class="nobr"><?php echo Mage::helper('core')->formatDate($token->getExpiryDate(), 'medium', false); ?></span></td>
+                                    <td style="text-align: center; vertical-align: middle;" class="last">
+                                        <?php $_vendor = $token_helper->getCardVendor($token->getToken()); ?>
+                                        <span title="<?php echo $_vendor['label']; ?>">
+                                            <i style="font-family: PaymentFont;font-style: normal;font-size: 25px;" class="pf-<?php echo $_vendor['id'] ?>"></i>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <?php $i++; endforeach; ?>
+                            <tr>
+                                <td colspan="4">
+                                    <label><input type="radio" onclick="tokenPaymentMethodChange();" id="hid_<?php echo $_code ?>_token" name="bancasella_iframe[token]" style="margin-right: 4px;" value="" autocomplete="off" /> <?php echo $this->__('Use new card'); ?></label>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </li>
+                <?php endif; ?>
+                <li style="<?php if($hasToken){ echo 'display: none'; } ?>" class="gestpay-form-field">
+                    <label for="<?php echo $_code ?>_cc_number" class="<?php if(!$hasToken){ echo 'required'; } ?>"><?php echo $this->__('Credit Card Number') ?></label>
+                    <div class="input-box">
+                        <input <?php if($hasToken){ echo 'disabled'; } ?> type="text" id="hid_<?php echo $_code ?>_cc_number" name="bancasella_iframe[cc_number]" title="<?php echo $this->__('Credit Card Number') ?>" class="input-text <?php if(!$hasToken){ echo 'required-entry'; } ?> validate-number validate-cc-number" value="" autocomplete="off" />
+                    </div>
+                </li>
+                <li style="<?php if($hasToken){ echo 'display: none'; } ?>" class="gestpay-form-field">
+                    <label for="hid_<?php echo $_code ?>_cc_exp_mm" class="<?php if(!$hasToken){ echo 'required'; } ?>"><?php echo $this->__('Expiration Date') ?></label>
+                    <div class="input-box">
+                        <div class="v-fix">
+                            <select <?php if($hasToken){ echo 'disabled'; } ?> id="hid_<?php echo $_code ?>_cc_exp_mm" name="bancasella_iframe[cc_exp_mm]" class="month <?php if(!$hasToken){ echo 'required-entry'; } ?>">
+                                <?php foreach ($this->getCcMonths() as $k=>$v): ?>
+                                    <option value="<?php echo $k?$k:'' ?>"><?php echo $v ?></option>
+                                <?php endforeach ?>
+                            </select>
+                        </div>
+                        <div class="v-fix">
+                            <select <?php if($hasToken){ echo 'disabled'; } ?> id="hid_<?php echo $_code ?>_cc_exp_yy" name="bancasella_iframe[cc_exp_yy]" class="year <?php if(!$hasToken){ echo 'required-entry'; } ?>">
+                                <?php foreach ($this->getCcYears() as $k=>$v): ?>
+                                    <option value="<?php echo $k?$k:'' ?>"><?php echo $v ?></option>
+                                <?php endforeach ?>
+                            </select>
+                        </div>
+                    </div>
+                </li>
+                <li style="<?php if($hasToken){ echo 'display: none'; } ?>" class="gestpay-form-field">
+                    <label for="<?php echo $_code ?>_cc_cvv" class="<?php if(!$hasToken){ echo 'required'; } ?>"><?php echo $this->__('CVV2 / 4DBC') ?></label>
+                    <div class="input-box">
+                        <input type="text" id="hid_<?php echo $_code ?>_cc_cvv" name="bancasella_iframe[cc_cvv]" title="<?php echo $this->__('CVV2 / 4DBC') ?>" class="input-text <?php if(!$hasToken){ echo 'required-entry'; } ?> validate-number" value="" autocomplete="off" />
+                    </div>
+                </li>
+                <li style="<?php if($hasToken){ echo 'display: none'; } ?>" class="gestpay-form-field">
+                    <label for="<?php echo $_code ?>_cc_name" class="<?php if(!$hasToken){ echo 'required'; } ?>"><?php echo $this->__('Name on Card') ?></label>
+                    <div class="input-box">
+                        <input <?php if($hasToken){ echo 'disabled'; } ?> type="text" id="hid_<?php echo $_code ?>_cc_name" name="bancasella_iframe[cc_name]" title="<?php echo $this->__('Name on Card') ?>" class="input-text <?php if(!$hasToken){ echo 'required-entry'; } ?>" value="" autocomplete="off" />
+                    </div>
+                </li>
+                <li style="<?php if($hasToken){ echo 'display: none'; } ?>" class="gestpay-form-field">
+                    <label for="<?php echo $_code ?>_cc_email" class="<?php if(!$hasToken){ echo 'required'; } ?>"><?php echo $this->__('Email') ?></label>
+                    <div class="input-box">
+                        <input <?php if($hasToken){ echo 'disabled'; } ?> type="text" id="hid_<?php echo $_code ?>_cc_email" name="bancasella_iframe[cc_email]" title="<?php echo $this->__('Email') ?>" class="input-text <?php if(!$hasToken){ echo 'required-entry'; } ?> validate-email" value="" autocomplete="off" />
+                    </div>
+                </li>
+            </ul>
+        <?php else: ?>
+            <ul id="payment_form_<?php echo $_code ?>" style="display: none;" class="payment_form_<?php echo $_code ?>">
+                <?php if ($alternativeHelper->isEnabled()): ?>
+                    <?php echo $alternativeHelper->getSelectBox();?>
+                <?php endif; ?>
+                <li>
+                    <?php  echo $this->__($method->getConfigData ( 'description' )) ?>
+                </li>
+            </ul>
+        <?php endif; ?>
+
+        <?php if($this->isIframeEnabled()): ?>
+            <script type="text/javascript">
+                //<![CDATA[
+                var GestPayConfig = {};
+                var initBancaSellaForm = function() {
+                    if ( typeof BancaSellaForm !== 'undefined') {
+
+                        var GestPayConfig = {};
+                        GestPayConfig.merchantId = '<?php echo $merchantId ?>';
+                        <?php if($encryptString): ?>
+                        GestPayConfig.stringEncrypt = '<?php echo $encryptString ?>';
+                        <?php endif; ?>
+                        GestPayConfig.formId = 'payment_iframe_<?php echo $_code ?>';
+                        GestPayConfig.radioBancaSella = 'p_method_<?php echo $_code ?>';
+                        GestPayConfig.cssSelectorInfo = '#payment_form_<?php echo $_code ?> li';
+                        GestPayConfig.GestPayExternalClass = GestPay;
+                        GestPayConfig.idStart = 'hid_<?php echo $_code ?>';
+                        GestPayConfig.cssSelectorRadioPayment = '#checkout-payment-method-load input[type="radio"]';
+                        GestPayConfig.confirmPage = '<?php echo $this->getPage3d(); ?>';
+                        GestPayConfig.authPage = '<?php echo $this->getAuthPage(); ?>';
+                        GestPayConfig.showHidePaymentDivId = 'opc-payment';
+                        GestPayConfig.waitImage = '<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>';
+                        GestPayConfig.successRedirect = '<?php echo $this->getSuccessRedirect()?>';
+                        GestPayConfig.isRecurringProfile = '<?php echo $this->isRecurringProfile()?>';
+                        GestPayConfig.code = '<?php echo $_code ?>';
+                        GestPayConfig.enableRed = <?php echo $this->isRedEnabled() ? 'true' : 'false'; ?>;
+                        GestPayConfig.enableRiskified = <?php echo $this->isRiskifiedEnabled() ? 'true' : 'false'; ?>;
+
+                        GestPayConfig.enableFormToIframe = typeof BrowserEnabled !== 'undefined' ? BrowserEnabled : false;
+
+                        BancaSellaForm.init(GestPayConfig);
+
+                    } else {
+                        // wait for load
+                        setTimeout(initBancaSellaForm, 100);
+                    }
+                };
+                initBancaSellaForm();
+
+                //]]>
+            </script>
+        <?php endif; ?>
+    </fieldset>
+<?php
+}catch(Exception $e){
+    $_helper= Mage::helper('easynolo_bancasellapro');
+    $_helper->log($e->getMessage());
+
+    if($this->isRecurringProfile()){
+        ?>
+        <script type="text/javascript">
+            //<![CDATA[
+            if ( typeof BancaSellaForm !== 'undefined' ){
+                BancaSellaForm.code= '<?php echo $_code ?>';
+                BancaSellaForm.removePaymentMethod();
+            }
+            //]]>
+        </script>
+    <?php
+    }
+}
+?>
