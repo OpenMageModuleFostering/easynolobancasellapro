@@ -1,16 +1,19 @@
 {
-    "name": "OpenMageModuleFostering/EASYNOLOBANCASELLAPRO",
+    "name": "OpenMageModuleFostering\/EASYNOLOBANCASELLAPRO",
     "type": "magento-module",
     "license": "GPL",
     "homepage": "",
     "description": "OFFICIAL extension for Magento that allow customers to pay through the GestPay payment gateway by Banca Sella",
     "authors": [
-    {
-        "name": "Easy Nolo SpA",
-        "email": "alessio.damonti@sella.it"
-    }
-],
+        {
+            "name": "Easy Nolo SpA",
+            "email": "alessio.damonti@sella.it"
+        }
+    ],
     "suggest": {
-        "magento-hackathon/magento-composer-installer": "*"
-    }
+        "magento-hackathon\/magento-composer-installer": "*"
+    },
+    "keywords": [
+        "openmage-module"
+    ]
 }
